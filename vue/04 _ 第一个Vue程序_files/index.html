@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 参考了mustache模板引擎的写法 -->
+    <!-- 在浏览器的console 输入vm.message = 'hello vue'可以看到页面的hello word 改变了，这就是vue的响应式 -->
+    <div id="app">
+        {{message}}
+        <!-- 只支持语句不支持表达式，比如： var a = 10 -->
+        {{message + message }} 
+        <br>
+        <!-- 还提供了一个指令 这样他的id就会变成message里面的内容 即id变成hello word-->
+        <div v-bind:id="message"></div>
+        <div :id="message"></div>
+
+        <!-- <ul>
+            <span v-if="!item.del">{{item.title}}</span>
+            <span v-else style="text-decoration: line-through;">{{item.title}}</span>
+            是否显示 实际上已经在document里面只是是否隐藏
+            <button v-show="!item.del"></button>
+        </ul> -->
+        <ul v-for='item in list'>
+            <span v-if="!item.del">{{item.title}}</span>
+            <span v-else style="text-decoration: line-through;">{{item.title}}</span>
+            <!-- 是否显示 实际上已经在document里面只是是否隐藏 -->
+            <button v-show="!item.del"></button>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world',
+                list: [
+                    {
+                        title: '课程1',
+                        del: false
+                    },
+                    {
+                        title: '课程1',
+                        del: true
+                    },
+                    {
+                        title: '课程1',
+                        del: false
+                    }
+                ]
+                // item: {
+                //     title: '课程1',
+                //     del: false
+                // }
+            }
+        })
+    </script>
+</body>
+</html>
