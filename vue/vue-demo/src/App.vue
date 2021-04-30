@@ -1,17 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+        <input v-model="message">
+    <input :value="message" @input="handleChange">
+    {{message}} {{message + message}}
+        <div :id="message"></div>
+        <!-- <ul>
+            <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+        </ul> -->
+        <todo-list>
+          <!-- 自定义的元素需要绑定key值 :key="index"   Custom elements in iteration require 'v-bind:key' directives.eslint-plugin-vue -->
+            <todo-item @delete="handleDelete" v-for="(item, index) in list" :key="index" :title="item.title" :del="item.del">
+                <template v-slot:pre-icon="{value}">
+                    <span>前置图标 {{value}}</span>
+                </template>
+            </todo-item>
+        </todo-list>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import TodoItem from './components/TodoItem.vue'
+import TodoItem from './components/TodoList.vue'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    TodoItem,//注册组件
+    TodoList
+  },
+  data() {//data:function(){},
+    return {
+      message: 'hello world',
+      list: [{
+          title: '课程1',
+          del: false
+      }, {
+          title: '课程2',
+          del: true
+      }],
+    }
+  },
+  methods: {
+    handleChange(e) {
+      this.message = e.target.value
+    },
+    handleDelete(val) {
+        // eslint-disable-next-line no-console
+        console.log('handleDelete', val)
+    }
   }
 }
 </script>
