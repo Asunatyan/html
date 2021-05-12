@@ -27,16 +27,16 @@ export default {
   },
   methods: {
     handleNameChange() {
-      this.name = "vue" + Date.now();
+      this.name = "vue" + Date.now();//因为没有放在return里面所有就没有
       console.log("this.name 发生了变化，但是并没有触发子组件更新", this.name);
     },
     handleInfoChange() {
-      this.info.number = 1;
+      this.info.number = 1;//没有先声明所以框架没有这个东西
       // this.$set(this.info, 'number', 1)
       console.log("this.info 发生了变化，但是并没有触发子组件更新", this.info);
     },
     handleListChange() {
-      this.list.push(1, 2, 3);
+      this.list.push(1, 2, 3);//可以更新dom
       console.log("this.list 并没有发生变化，但是触发了子组件更新", this.list);
     }
   }

@@ -23,7 +23,7 @@ export default {
       b: "world"
     };
   },
-  updated() {
+  updated() {//生命周期  由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。 
     console.log("触发 PropsAndData updated");
   },
   methods: {
