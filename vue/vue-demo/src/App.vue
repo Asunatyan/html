@@ -2,9 +2,9 @@
 
 <template>
   <div id="app">
-        <input v-model="message">
-    <input :value="message" @input="handleChange">
-    {{message}} {{message + message}}
+    双向绑定
+        <input v-model="message"> <!-- v-mode就是语法糖===> 等同于 --><input :value="message" @input="handleChange">
+        {{message}} {{message + message}}
         <div :id="message"></div>
         <!-- <ul>
             <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     handleChange(e) {
-      this.message = e.target.value
+      this.message = e.target.value//触发事件input的value
     },
     handleDelete(val) {
         // eslint-disable-next-line no-console
