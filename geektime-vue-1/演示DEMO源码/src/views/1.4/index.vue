@@ -9,9 +9,9 @@
   </div>
 </template>
 <script>
-import PropsAndData from "./PropsAndData";
+import PropsAndData from "./PropsAndData";//导入组件并命名
 let name = "world";
-export default {
+export default { //注册组件
   components: {
     PropsAndData
   },
