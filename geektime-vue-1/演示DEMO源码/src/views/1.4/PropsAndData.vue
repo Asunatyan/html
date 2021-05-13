@@ -10,14 +10,14 @@
   </div>
 </template>
 <script>
-export default {
+export default {  //??????
   name: "PropsAndData",
-  props: {
+  props: {//Prop 向子组件传递数据  就是这样传递数据<PropsAndData :name="name" :info="info" :list="list" />
     info: Object,
     name: String,
     list: Array
   },
-  data() {
+  data: function () {//data (){} 相同
     return {
       a: "hello",
       b: "world"
