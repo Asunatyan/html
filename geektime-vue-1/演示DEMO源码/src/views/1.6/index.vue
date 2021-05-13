@@ -18,6 +18,7 @@
             {{ var2 }}
           </template>
         </TempVar>
+         <!-- 这里的var1 和var2 就变成了临时变量-->
       </a-tab-pane>
     </a-tabs>
   </div>
