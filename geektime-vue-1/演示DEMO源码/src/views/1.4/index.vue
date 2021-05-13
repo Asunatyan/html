@@ -18,10 +18,11 @@ export default { //注册组件
   data() {
     this.name = name;
     return {
-      info: {},
-      // info: {
-      //   number: undefined
-      // },
+      //info: {},//没有定义 number 也不会触发updated() 
+       info: {
+         //number: 12 //触发更新updated() 
+         //number: undefined //不触发更新updated() 
+       },
       list: []
     };
   },
