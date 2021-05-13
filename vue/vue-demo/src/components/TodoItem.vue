@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-  props: {
+  props: { //定义当前组件接收的参数
       title: String,
       del: {
           type: Boolean,
@@ -30,7 +30,7 @@ export default {
   },
 }
 </script>
-<!-- style scoped scoped 会帮我们在<el  data-v-hash值 class> 生成一个hash值-->
+<!-- style scoped scoped 当前的组件才会生效  会帮我们在<el  data-v-hash值 class> 生成一个hash值-->
 <style scoped> 
 .red {
   color: red;

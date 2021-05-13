@@ -1,3 +1,5 @@
+ <!--APP.vue  这个文件就是单文件组件了-->
+
 <template>
   <div id="app">
         <input v-model="message">
@@ -11,7 +13,7 @@
           <!-- 自定义的元素需要绑定key值 :key="index"   Custom elements in iteration require 'v-bind:key' directives.eslint-plugin-vue -->
             <todo-item @delete="handleDelete" v-for="(item, index) in list" :key="index" :title="item.title" :del="item.del">
                 <template v-slot:pre-icon="{value}">
-                    <span>前置图标 {{value}}</span>
+                    <span>前置图标 {{value}}  在这里-------</span>
                 </template>
             </todo-item>
         </todo-list>
@@ -19,9 +21,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import TodoItem from './components/TodoItem.vue'
-import TodoItem from './components/TodoList.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+import TodoItem from './components/TodoItem.vue' //导入单文件组件 这个组件只在App.vue中生效 ,如果需要全局都生效那么需要在main.js中进行注册
+import TodoList from './components/TodoList.vue'
 
 export default {
   name: 'app',
