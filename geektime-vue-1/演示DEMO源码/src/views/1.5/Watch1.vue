@@ -1,5 +1,7 @@
 <template>
   <div>
+    计算属性vs 监听器
+    <hr>
     {{ fullName }}
 
     <div>firstName: <input v-model="firstName" /></div>
@@ -17,6 +19,7 @@ export default {
   },
   watch: {
     firstName: function(val) {
+      console.log(val);
       this.fullName = val + " " + this.lastName;
     },
     lastName: function(val) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ log("render") }}
+    {{ log("5.render") }}
     {{ now }}
     <button @click="start = !start">{{ start ? "停止" : "开始" }}</button>
   </div>
@@ -9,7 +9,7 @@
 import moment from "moment";
 export default {
   data: function() {
-    console.log("data");
+    console.log("2.data");
     this.moment = moment;
     this.log = window.console.log;
     return {
@@ -18,21 +18,22 @@ export default {
     };
   },
   watch: {
-    start() {
+    start(a,b) {//start: function(a,b) 
+      console.log("start() 被监听到了","now",this.start,"old",a,"new",b);
       this.startClock();
     }
   },
   beforeCreate() {
-    console.log("beforeCreate");
+    console.log("1.beforeCreate");
   },
   created() {
-    console.log("created");
+    console.log("3.created");
   },
   beforeMount() {
-    console.log("beforeMount");
+    console.log("4.beforeMount");
   },
   mounted() {
-    console.log("mounted");
+    console.log("6.mounted");
     this.startClock();
   },
   beforeUpdate() {
@@ -42,7 +43,7 @@ export default {
     console.log("updated");
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
+    console.log("beforeDestroy "+"---->"+this.clockInterval);
     clearInterval(this.clockInterval);
   },
   destroyed() {
@@ -51,6 +52,7 @@ export default {
   methods: {
     startClock() {
       clearInterval(this.clockInterval);
+      console.log("this.start:"+this.start);
       if (this.start) {
         this.clockInterval = setInterval(() => {
           this.now = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");

@@ -1,7 +1,8 @@
 <template>
   <div>
-    {{ fullName }}
 
+
+    {{ fullName }}
     <div>firstName: <input v-model="firstName" /></div>
     <div>lastName: <input v-model="lastName" /></div>
   </div>
@@ -10,9 +11,9 @@
 export default {
   data: function() {
     return {
-      firstName: "Foo",
-      lastName: "Bar",
-      fullName: "Foo Bar"
+      firstName: "Foo11",
+      lastName: "Bar11",
+      fullName: "Foo Bar11"
     };
   },
   watch: {
@@ -20,7 +21,7 @@ export default {
       clearTimeout(this.firstTimeout);
       this.firstTimeout = setTimeout(() => {
         this.fullName = val + " " + this.lastName;
-      }, 500);
+      }, 3000);
     },
     lastName: function(val) {
       clearTimeout(this.lastTimeout);

@@ -1,5 +1,7 @@
 <template>
   <div>
+    计算属性vs 监听器
+    <hr>
     {{ fullName }}
 
     <div>firstName: <input v-model="firstName" /></div>
@@ -10,17 +12,17 @@
 export default {
   data: function() {
     return {
-      firstName: "Foo",
-      lastName: "Bar"
+      firstName: "Foo2",
+      lastName: "Bar2"
     };
   },
   computed: {
     fullName: function() {
-      return this.firstName + " " + this.lastName;
+      return this.firstName + " " + this.lastName; //fullName 修改fullName
     }
   },
   watch: {
-    fullName: function(val, oldVal) {
+    fullName: function(val, oldVal) {//监听 fullName
       console.log("new: %s, old: %s", val, oldVal);
     }
   }

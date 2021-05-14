@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    这种方式获取组件的data对象,区别于vm.$data ß
+    这种方式获取组件的data对象,区别于vm.$data
     {{ $data }} 
     <br />
     <button @click="() => (a += 1)">a+1</button>
@@ -33,25 +33,25 @@ export default {
   watch: {
     a: function(val, oldVal) {
       this.b.c += 1;
-      console.log("new: %s, old: %s", val, oldVal);
+      console.log("a->new: %s, old: %s", val, oldVal);
     },
     "b.c": function(val, oldVal) {
       this.b.d += 1;
-      console.log("new: %s, old: %s", val, oldVal);
+      console.log("b.c-> new: %s, old: %s", val, oldVal);
     },
     "b.d": function(val, oldVal) {
       this.e.f.g += 1;
-      console.log("new: %s, old: %s", val, oldVal);
+      console.log("b.d-> new: %s, old: %s", val, oldVal);
     },
     e: {
       handler: function(val, oldVal) {
         this.h.push("😄");
-        console.log("new: %s, old: %s", val, oldVal);
+        console.log("e->new: %s, old: %s", val, oldVal);
       },
       deep: true
     },
     h(val, oldVal) {
-      console.log("new: %s, old: %s", val, oldVal);
+      console.log("h->new: %s, old: %s", val, oldVal);
     }
   }
 };
