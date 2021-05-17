@@ -13,7 +13,7 @@ export default {
     ChildrenE,
     ChildrenF
   }
-  // provide() {
+  // provide() {//从下到上找到第一个provide()那么A上面的就会失效只有I节点变红,C节点变绿
   //   return {
   //     theme: {
   //       color: "green"

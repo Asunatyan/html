@@ -7,8 +7,8 @@
 export default {
   components: {},
   inject: {
-    theme1: {
-      from: "theme",
+    theme1: {//防止名字冲突
+      from: "theme",//别名
       default: () => ({})
     }
   }

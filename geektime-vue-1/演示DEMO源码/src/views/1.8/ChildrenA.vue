@@ -17,16 +17,16 @@ export default {
     ChildrenC,
     ChildrenD
   },
-  provide() {
+  provide() {//A节点提供一个color属性
     return {
       theme: {
-        color: this.color
+        color: this.color// Provide提供的数据默认都不是响应式的 这个官方文档有说明 可以在文档中直接搜索provide这个关键字
       }
     };
   },
   // provide() {
   //   return {
-  //     theme: this
+  //     theme: this //提供this 当前的属性都会过去
   //   };
   // },
   data() {

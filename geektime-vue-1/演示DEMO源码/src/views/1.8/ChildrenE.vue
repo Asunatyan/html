@@ -7,7 +7,7 @@
 <script>
 export default {
   components: {},
-  inject: {
+  inject: {//E节点注入属性
     theme: {
       default: () => ({})
     }
