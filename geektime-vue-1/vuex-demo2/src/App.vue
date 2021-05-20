@@ -10,6 +10,7 @@ export default {
   name: 'app',
   computed: {
     count() {
+      debugger
       return this.$store.state.count
     }
   }

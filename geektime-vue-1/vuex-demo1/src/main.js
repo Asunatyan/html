@@ -9,12 +9,13 @@ const store = new Vuex.Store({
   state: {
     count: 0,
   },
-  mutations: {
+  mutations: {//同步
+    //更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。
     increment(state) {
       state.count++
     }
   },
-  actions: {
+  actions: {//异步
     increment({commit}) {
       setTimeout(()=>{
         // state.count++ // 不要对state进行更改操作，应该通过commit交给mutations去处理
@@ -22,7 +23,7 @@ const store = new Vuex.Store({
       }, 3000)
     }
   },
-  getters: {
+  getters: {//类似于计算属性可以缓存
     doubleCount(state) {
       return state.count * 2
     }
