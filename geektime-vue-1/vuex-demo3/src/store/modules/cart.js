@@ -72,7 +72,7 @@ const actions = {
 */
   addProductToCart ({ state, commit }, product) {
     commit(CART.SET_CHECKOUT_STATUS, null)
-    if (product.inventory > 0) {
+    if (product.inventory > 0) {//库存大于0
       const cartItem = state.items.find(item => item.id === product.id)
       if (!cartItem) {
         commit(CART.PUSH_PRODUCT_TO_CART, { id: product.id })
@@ -108,11 +108,12 @@ const mutations = {
     state.items = items
   },
 
+  //setCheckoutStatus
   [CART.SET_CHECKOUT_STATUS] (state, status) {
     state.checkoutStatus = status
   },
   ['testMethod'](){
-    state.test = 2
+    state.test++
   }
 }
 

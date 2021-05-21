@@ -24,7 +24,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  computed: mapState({
+  computed: mapState({//如果不适用mapstate那么每个state就要用this.&store.state.状态
     products: state => state.products.all,
     test : state=>state.cart.test  //要用state.命名空间.state
   }),
@@ -58,8 +58,8 @@ export default {
   //     this.$store.dispatch('cart/addProductToCart', product)
   //   }
   // },
-  created () {
-    this.$store.dispatch('products/getAllProducts')
+  created () {//初始化产品  Action 提交的是 mutation，而不是直接变更状态。
+     this.$store.dispatch('products/getAllProducts')//命名空间的名字也就是模块名/模块下对应的方法名
   }
 }
 </script>

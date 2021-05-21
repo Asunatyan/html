@@ -19,6 +19,7 @@
 import { mapGetters, mapState } from 'vuex'
 
 export default {
+  //...对象展开,使得,checkoutStatus,和getter中的products,total变成{checkoutStatus:function(){},products:(){},total:function(){}}
   computed: {
     ...mapState({
       checkoutStatus: state => state.cart.checkoutStatus

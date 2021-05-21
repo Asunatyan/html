@@ -12,7 +12,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    cart,
+    cart,//导入模块中的vuex
     products
   },
 })
