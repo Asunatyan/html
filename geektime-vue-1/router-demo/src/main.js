@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
-import routes from './routes'
+import routes from './routes'//路由列表
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'history',//地址栏上的去掉#号
   routes,
 })
 
