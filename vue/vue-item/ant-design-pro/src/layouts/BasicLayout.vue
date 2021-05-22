@@ -1,24 +1,25 @@
 <template>
-  <div>
+  <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-      <!-- 
-        trigger	自定义 trigger，设置为 null 时隐藏 trigger
-        collapsed	当前收起状态
-         -->
-      <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-        <div class="logo" />
+      <!-- :theme="navTheme"  这里的取值我很疑惑??????? -->
+      <a-layout-sider
+        v-if="navLayout === 'left'"
+        :theme="navTheme"
+        :trigger="null"
+        collapsible
+        v-model="collapsed"
+      >
+        <div class="logo">Ant Design Vue Pro</div>
         <SiderMenu />
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
-          <!-- icon -->
-          <a-icon  
-              class="trigger" 
-              :type="!collapsed? 'menu-fold' :'menu-unfold'"
-              @click="collapsed=!collapsed" >
-          </a-icon>
+          <a-icon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="collapsed = !collapsed"
+          ></a-icon>
           <Header />
-          
         </a-layout-header>
         <a-layout-content style="margin: 0 16px">
           <router-view></router-view>
@@ -28,7 +29,7 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <SettingDrawer></SettingDrawer>
+    <SettingDrawer />
   </div>
 </template>
 
@@ -41,25 +42,43 @@ import SettingDrawer from "../components/SettingDrawer";
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
     };
+  },
+  computed: {
+    navTheme: function () {
+      return this.$route.query.navTheme || "dark";
+    },
+    navLayout() {
+      return this.$route.query.navLayout || "left";
+    },
   },
   components: {
     Header,
     Footer,
     SiderMenu,
-    SettingDrawer
-  }
+    SettingDrawer,
+  },
 };
 </script>
 <style scoped>
 .trigger {
-    padding: 0 20px;
-    line-height: 64px;
-    font-size: 25px;
+  padding: 0 20px;
+  line-height: 64px;
+  font-size: 25px;
 }
 
-.trigger :hover{
+.trigger :hover {
   background: #eeeeee;
+}
+
+.logo {
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  overflow: hidden;/* overflow 属性规定当内容溢出元素框时发生的事情。 hidden	内容会被修剪，并且其余内容是不可见的。 */
+}
+.nav-theme-dark >>> .logo {
+  color: #ffffff;
 }
 </style>>

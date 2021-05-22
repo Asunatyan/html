@@ -6,7 +6,7 @@ import "nprogress/nprogress.css";
 //import RenderRouterView from "./components/RenderRouterView";
 Vue.use(Router);
 
-const router = new  Router({
+const router = new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
@@ -111,7 +111,7 @@ const router = new  Router({
                         }
                     ]
                 },
-                
+
             ]
         },
         {
@@ -123,14 +123,16 @@ const router = new  Router({
 })
 
 //路由之前
-router.beforeEach((to,from,next)=>{
-    NProgress.start();
+router.beforeEach((to, from, next) => {
+    if (to.path !== from.path) {//如果切换的页面是同一个就不需要有进度条了
+        NProgress.start();
+    }
     next();
 })
 
 //路由之后
-router.afterEach(()=>{
-  NProgress.done();
+router.afterEach(() => {
+    NProgress.done();
 })
 
 export default router
