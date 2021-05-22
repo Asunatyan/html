@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 import NotFound from "./views/Exception/404";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 //import RenderRouterView from "./components/RenderRouterView";
 Vue.use(Router);
 
-export default new Router({
+const router = new  Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
@@ -119,3 +121,16 @@ export default new Router({
         }
     ]
 })
+
+//路由之前
+router.beforeEach((to,from,next)=>{
+    NProgress.start();
+    next();
+})
+
+//路由之后
+router.afterEach(()=>{
+  NProgress.done();
+})
+
+export default router
