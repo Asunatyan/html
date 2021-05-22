@@ -7,15 +7,16 @@ import store from "./store";
 //import 'ant-design-vue/dist/antd.css';//引入样式
 //import 'ant-design-vue/dist/antd.less';//引入样式全部
 
-import Button from "ant-design-vue/lib/button";
-import 'ant-design-vue/lib/button/style';//引入样式部分
-
+import {Button,Layout} from "ant-design-vue";
 
 Vue.config.productionTip = false;
+
+
 Vue.use(Button)
+Vue.use(Layout)
+
 new Vue({
   router,
   store,
-  Button,
   render: (h) => h(App),
 }).$mount("#app");
