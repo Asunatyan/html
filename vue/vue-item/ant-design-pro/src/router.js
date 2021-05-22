@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import RenderRouterView from "./components/RenderRouterView";
+//import RenderRouterView from "./components/RenderRouterView";
 Vue.use(Router);
 
 export default new Router({
@@ -11,7 +11,9 @@ export default new Router({
         {
             path: "/user",
             //hideInMenu: true,
-            component: RenderRouterView,
+            //使用render函数代替组件的导入
+            //component: RenderRouterView,
+            component: {render:h=>h("router-view")},
             children: [
                 {
                     path: "/user/login",
