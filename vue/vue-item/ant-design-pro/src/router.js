@@ -12,7 +12,7 @@ const router = new Router({
     routes: [
         {
             path: "/user",
-            //hideInMenu: true,
+            hideInMenu: true,
             //使用render函数代替组件的导入
             //component: RenderRouterView,
             //component: {render:h=>h("router-view")},
@@ -39,9 +39,9 @@ const router = new Router({
         },
         {
             path: "/",
-            meta: { authority: ["user", "admin"] },
+            //meta: { authority: ["user", "admin"] },
             component: () =>
-                import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout"),
+                import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout"),//访问/ 就会到这个组件
             children: [
                 // dashboard
                 {
@@ -51,13 +51,14 @@ const router = new Router({
                 {
                     path: "/dashboard",//访问dashboard不会 包含下面的analysis组件的
                     name: "dashboard",
-                    meta: { icon: "dashboard", title: "仪表盘" },
+                    meta: { icon: "dashboard", title: "仪表盘 hhhh" },
+                    //但是如果我的父路由的组件没有布局或样式，仅仅只是显示子路由的组件内容，专门创建一个组件并标记，很浪费，我们可以采用component: { render: h => h("router-view") },的方式动态注册
                     component: { render: h => h("router-view") },
                     children: [
                         {
                             path: "/dashboard/analysis",//会包含下面的analysis组件的
                             name: "analysis",
-                            meta: { title: "分析页" },
+                            meta: { title: "分析页我就是玩儿", aaa:"我就是玩儿" },
                             component: () =>
                                 import(/* webpackChunkName: "dashboard" */ "./views/Dashboard/Analysis")
                         }
@@ -66,7 +67,7 @@ const router = new Router({
                 // form
                 {
                     path: "/form",
-                    name: "form",
+                    name: "form",//有name就作为菜单去渲染
                     component: { render: h => h("router-view") },
                     meta: { icon: "form", title: "表单", authority: ["admin"] },
                     children: [
@@ -80,7 +81,7 @@ const router = new Router({
                         {
                             path: "/form/step-form",
                             name: "stepform",
-                            hideChildrenInMenu: true,
+                            hideChildrenInMenu: true,//添加标识
                             meta: { title: "分布表单" },
                             component: () =>
                                 import(/* webpackChunkName: "form" */ "./views/Forms/StepForm"),
@@ -117,6 +118,7 @@ const router = new Router({
         {
             path: "*",
             name: "404",
+            hideInMenu: true,
             component: NotFound
         }
     ]
@@ -124,6 +126,7 @@ const router = new Router({
 
 //路由之前
 router.beforeEach((to, from, next) => {
+    console.log(to,from);
     if (to.path !== from.path) {//如果切换的页面是同一个就不需要有进度条了
         NProgress.start();
     }
