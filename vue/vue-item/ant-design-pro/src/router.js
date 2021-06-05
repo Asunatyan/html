@@ -138,7 +138,6 @@ const router = new Router({
 
 //路由之前
 router.beforeEach((to, from, next) => {
-    console.log(to,from);
     if (to.path !== from.path) {//如果切换的页面是同一个就不需要有进度条了
         NProgress.start();
     }
