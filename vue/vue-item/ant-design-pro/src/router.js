@@ -1,8 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
 import NotFound from "./views/Exception/404";
+import Forbidden from "./views/Exception/403";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+
+import { notification } from "ant-design-vue";
+
+import findLast from "lodash/findLast";
+import { check, isLogin } from "./utils/auth";
 //import RenderRouterView from "./components/RenderRouterView";
 Vue.use(Router);
 
@@ -39,7 +45,7 @@ const router = new Router({
         },
         {
             path: "/",
-            //meta: { authority: ["user", "admin"] },
+            meta: { authority: ["user", "admin"] },/* 添加权限相关元信息 */
             component: () =>
                 import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout"),//访问/ 就会到这个组件
             children: [
@@ -69,7 +75,7 @@ const router = new Router({
                     path: "/form",
                     name: "form",//有name就作为菜单去渲染
                     component: { render: h => h("router-view") },
-                    meta: { icon: "form", title: "表单", authority: ["admin"] },
+                    meta: { icon: "form", title: "表单",  authority:  ["admin"] },
                     children: [
                         {
                             path: "/form/basic-form",
@@ -116,6 +122,12 @@ const router = new Router({
             ]
         },
         {
+            path: "/403",
+            name: "403",
+            hideInMenu: true,
+            component: Forbidden
+        },
+        {
             path: "*",
             name: "404",
             hideInMenu: true,
@@ -130,6 +142,30 @@ router.beforeEach((to, from, next) => {
     if (to.path !== from.path) {//如果切换的页面是同一个就不需要有进度条了
         NProgress.start();
     }
+
+    /* 权限的判断 */
+    /* import findLast from "lodash/findLast"; */
+    const record = findLast(to.matched, record => record.meta.authority);
+    /* import { check, isLogin } from "./utils/auth"; */
+    /* 找到最近一个有权限的路由  找到了然后校验 */
+    if (record && !check(record.meta.authority)) {
+        if (!isLogin() && to.path !== "/user/login") {
+        next({
+            path: "/user/login"
+        });
+        } else if (to.path !== "/403") {
+            /* import { notification } from "ant-design-vue"; 通知框 */
+        notification.error({
+            message: "403",
+            description: "你没有权限访问，请联系管理员咨询。"
+        });
+        next({
+            path: "/403"
+        });
+        }
+        NProgress.done();
+    }
+
     next();
 })
 
