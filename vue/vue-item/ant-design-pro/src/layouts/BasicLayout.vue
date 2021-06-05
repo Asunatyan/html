@@ -32,7 +32,9 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <SettingDrawer />
+    <Authorized :authority="['admin']"><!-- 有admin的权限才会显示 -->
+      <SettingDrawer />
+    </Authorized>
   </div>
 </template>
 
