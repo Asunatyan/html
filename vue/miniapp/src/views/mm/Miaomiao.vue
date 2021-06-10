@@ -1,5 +1,6 @@
 <template>
-  <a-table :columns="columns" :data-source="data">
+<!-- :rowKey="(record,index)=>{return index}" -->
+  <a-table :columns="columns" :data-source="data" rowKey="dataIndex">
     <template v-slot:name="slotProps">
       <a>{{ slotProps }}11111111111</a>
     </template>
@@ -38,32 +39,34 @@
 <script>
 const columns = [
   {
-    dataIndex: "name",
-    key: "name",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "name" },
+    dataIndex: "id",
+    title: "id",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "gender",
+    dataIndex: "gender",
+    
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "disable",
+    dataIndex: "disable",
   },
   {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    scopedSlots: { customRender: "tags" },
+    title: "oneself",
+    dataIndex: "oneself",
+  },
+  {
+    title: "type",
+    dataIndex: "type",
+  },
+  {
+    title: "updateDate",
+    dataIndex: "updateDate",
   },
   {
     title: "Action",
-    key: "action",
-    scopedSlots: { customRender: "action" },
-  },
+    dataIndex: "Action",
+  }
 ];
 
 const data = [
@@ -100,7 +103,7 @@ export default {
   methods:{
     getHomeMultidata() {
         getHomeMultidata().then(res => {
-          this.data = res;
+          this.data = res.records;
           console.log(this.data);
         })
       }

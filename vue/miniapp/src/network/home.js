@@ -2,7 +2,7 @@ import {request} from "./request";
 
 export function getHomeMultidata() {
   return request({
-    url: '/api/user/userList?type=1'
+    url: 'user/userList?size=5&current=1'
   })
 }
 
