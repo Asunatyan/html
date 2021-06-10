@@ -19,7 +19,7 @@ const router = new Router({
                 // dashboard
                 {
                     path: "/",
-                    redirect: "/mm/miaomiao"
+                    redirect: "/mm/mm"
                 },
                 {
                     path: "/mm",//访问dashboard不会 包含下面的analysis组件的
@@ -29,11 +29,18 @@ const router = new Router({
                     component: { render: h => h("router-view") },
                     children: [
                         {
-                            path: "/mm/miaomiao",//会包含下面的analysis组件的
-                            name: "miaomiao",
+                            path: "/mm/mm",//会包含下面的analysis组件的
+                            name: "mm",
                             meta: { title: "mm1"},
                             component: () =>
                                 import(/* webpackChunkName: "dashboard" */ "views/mm/Miaomiao")
+                        },
+                        {
+                            path: "/mm/botton",//会包含下面的analysis组件的
+                            name: "botton",
+                            meta: { title: "botton"},
+                            component: () =>
+                                import(/* webpackChunkName: "dashboard" */ "views/mm/botton")
                         }
                     ]
                 },
@@ -99,7 +106,7 @@ const router = new Router({
 
 //路由之前
 router.beforeEach((to, from, next) => {
-    console.log(to,from);
+
     if (to.path !== from.path) {//如果切换的页面是同一个就不需要有进度条了
         NProgress.start();
     }

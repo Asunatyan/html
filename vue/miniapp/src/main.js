@@ -7,7 +7,7 @@ import store from "./store";
 //import 'ant-design-vue/dist/antd.css';//引入样式
 //import 'ant-design-vue/dist/antd.less';//引入样式全部
 
-import {Button,Layout,Icon,Drawer,Radio,Menu,Table,Tag,Divider} from "ant-design-vue";
+import {Button,Layout,Icon,Drawer,Radio,Menu,Table,Tag,Divider,Pagination} from "ant-design-vue";
 
 Vue.config.productionTip = false;
 
@@ -21,6 +21,7 @@ Vue.use(Menu);
 Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Divider);
+Vue.use(Pagination);
 
 
 
