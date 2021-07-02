@@ -38,6 +38,7 @@ const router = new Router({
                         {
                             path: "/mm/botton",//会包含下面的analysis组件的
                             name: "botton",
+                            hideInMenu: true,
                             meta: { title: "botton"},
                             component: () =>
                                 import(/* webpackChunkName: "dashboard" */ "views/mm/botton")

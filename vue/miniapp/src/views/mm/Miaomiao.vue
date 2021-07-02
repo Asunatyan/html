@@ -31,7 +31,11 @@
       <router-link :to="{
         path:'/mm/botton',
         query:{userid: record.id}
-      }">Go to Bar</router-link>
+      }"
+      target = "_blank"
+      >
+      Go to Bar
+      </router-link>
     </span>
   </a-table>
 </template>

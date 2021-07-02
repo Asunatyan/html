@@ -1,5 +1,5 @@
 <template>
-  <div>这里是详情</div>
+  <div>这里是详情userid={{$route.query.userid}}</div>
 </template>
 
 <script>
