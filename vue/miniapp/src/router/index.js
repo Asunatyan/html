@@ -30,7 +30,7 @@ const router = new Router({
                     children: [
                         {
                             path: "/mm/mm",//会包含下面的analysis组件的
-                            name: "mm",
+                            name: "mm1",
                             meta: { title: "mm1"},
                             component: () =>
                                 import(/* webpackChunkName: "dashboard" */ "views/mm/Miaomiao")
