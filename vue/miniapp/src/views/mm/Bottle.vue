@@ -30,7 +30,7 @@
       >
 
       <span slot="action" slot-scope="a, record">
-        <a-button type="primary" @click="showDrawer"> Open </a-button>
+        <a-button type="primary" @click="showDrawer(record.id)"> Open </a-button>
         <!-- <router-link
         :to="{
           path: '/mm/bottle',
@@ -42,7 +42,7 @@
       </router-link> -->
       </span>
     </a-table>
-    <BottleDetailDraw :isVisible="visible"/>
+    <BottleDetailDraw :isshow="isshow" :qid="qid"  @closeDrawer="closeDrawer" />
   </div>
 </template>
 
@@ -121,15 +121,25 @@ export default {
       data,
       columns,
       pagination: {},
-      visible: false
-    };
+      //subdata:false,
+      // subdata:{
+      //   visible:false,
+      //   qid:123,
+      // },
+      isshow:false,
+      qid:123
+    }
   },
   components: {
     BottleDetailDraw,
   },
   methods: {
-    showDrawer() {
-      this.visible = true;
+    showDrawer(id) {
+      this.isshow = true;
+      this.qid = id;
+    },
+    closeDrawer() {
+      this.isshow = false;
     },
     customRow(record, index) {
       //设置行属性
@@ -186,17 +196,19 @@ export default {
       });
     },
     handleTableChange(pagination) {
-      console.log(pagination);
+      // console.log(pagination);
       this.getHomeMultidata(pagination.pageSize, pagination.current);
     },
   },
   mounted() {
     let openid = this.$route.query.openid;
-    console.log(openid);
     // 1.请求多个数据
     this.getUserBottleList(openid, 10, 1);
 
     // 2.请求商品数据
   },
+  // updated (){
+  //   console.log("detail -> updated");
+  // }
 };
 </script>

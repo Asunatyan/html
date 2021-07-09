@@ -22,7 +22,7 @@ export function getUserBottleList(openid,size,current) {
 }
 
 //用户bottle详情
-export function getUserBottleDetail(openid,size,current) {
+export function getUserBottleDetail(qid,size,current) {
   return request({
     url: 'bottleDetail/userBottleDetailList',
     params: {
