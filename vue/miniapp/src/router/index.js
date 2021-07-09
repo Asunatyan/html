@@ -36,12 +36,20 @@ const router = new Router({
                                 import(/* webpackChunkName: "dashboard" */ "views/mm/Miaomiao")
                         },
                         {
-                            path: "/mm/botton",//会包含下面的analysis组件的
-                            name: "botton",
+                            path: "/mm/bottle",//会包含下面的analysis组件的
+                            name: "bottle",
                             hideInMenu: true,
-                            meta: { title: "botton"},
+                            meta: { title: "bottle"},
                             component: () =>
-                                import(/* webpackChunkName: "dashboard" */ "views/mm/botton")
+                                import(/* webpackChunkName: "dashboard" */ "views/mm/Bottle")//注意大小写 小写的好像不行
+                        },
+                        {
+                            path: "/mm/bottle/detailDraw",//会包含下面的analysis组件的
+                            name: "bottleDetail",
+                            hideInMenu: true,
+                            meta: { title: "bottleDetail"},
+                            component: () =>
+                                import(/* webpackChunkName: "dashboard" */ "views/mm/BottleDetailDraw")//注意大小写 小写的好像不行
                         }
                     ]
                 },

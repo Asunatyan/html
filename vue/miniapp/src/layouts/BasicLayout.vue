@@ -2,6 +2,7 @@
   <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh">
       <!-- :theme="navTheme"  :xxx就是v-model:的缩写数据绑定 -->
+      <!-- 侧边栏 -->
       <a-layout-sider
         v-if="navLayout === 'left'"
         :theme="navTheme"
@@ -12,8 +13,10 @@
       >
         <div class="logo">Ant Design Vue Pro</div>
         <SiderMenu :theme="navTheme" />
-      </a-layout-sider>
+      </a-layout-sider> 
+      <!-- 右边 -->
       <a-layout>
+        <!-- headr -->
         <a-layout-header style="background: #fff; padding: 0">
           <a-icon
             class="trigger"
@@ -22,6 +25,7 @@
           ></a-icon>
           <Header />
         </a-layout-header>
+        <!-- body -->
         <a-layout-content style="margin: 0 16px">
           <!-- 用来接受 router的 component: () =>
                                 import(/* webpackChunkName: "dashboard" */ "./views/Dashboard/Analysis") -->
@@ -32,7 +36,7 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <SettingDrawer />
+    <!-- <SettingDrawer /> -->
   </div>
 </template>
 
@@ -41,6 +45,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import SettingDrawer from "../components/SettingDrawer";
+
 
 export default {
   data() {

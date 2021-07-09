@@ -1,18 +1,20 @@
 <template>
+  <!-- <div>这里是详情openid={{$route.query.openid}}</div> -->
   <!-- :rowKey="(record,index)=>{return index}" -->
-  <a-table
-    :columns="columns"
-    :data-source="data"
-    rowKey="id"
-    :pagination="pagination"
-    size="default"
-    @change="handleTableChange"
-    :customRow="customRow"
-  >
-    <template v-slot:name="slotProps">
-      <a>{{ slotProps }}11111111111</a>
-    </template>
-    <!-- 
+  <div>
+    <a-table
+      :columns="columns"
+      :data-source="data"
+      rowKey="id"
+      :pagination="pagination"
+      size="default"
+      @change="handleTableChange"
+      :customRow="customRow"
+    >
+      <template v-slot:name="slotProps">
+        <a>{{ slotProps }}11111111111</a>
+      </template>
+      <!-- 
        下面的写法已经废弃了使用上面的写法  来获取子组件中才有的数据 
 
        子组件的定义类似小面这样的
@@ -22,23 +24,28 @@
         </slot>
       </span>
        -->
-    <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
-    <span slot="customTitle" slot-scope="type"
-      ><a-icon type="smile-o" /> {{ type }}</span
-    >
-
-    <span slot="action" slot-scope="a,record">
-      <router-link :to="{
-        path:'/mm/bottle',
-        query:{openid: record.openid}
-      }"
-      target = "_blank"
+      <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
+      <span slot="customTitle" slot-scope="type"
+        ><a-icon type="smile-o" /> {{ type }}</span
       >
-      Go to Bar
-      </router-link>
-    </span>
-  </a-table>
+
+      <span slot="action" slot-scope="a, record">
+        <a-button type="primary" @click="showDrawer"> Open </a-button>
+        <!-- <router-link
+        :to="{
+          path: '/mm/bottle',
+          query: { openid: record.openid },
+        }"
+        target="_blank"
+      >
+        Go to Bar
+      </router-link> -->
+      </span>
+    </a-table>
+    <BottleDetailDraw :isVisible="visible"/>
+  </div>
 </template>
+
 <script>
 const columns = [
   {
@@ -46,25 +53,54 @@ const columns = [
     title: "id",
   },
   {
-    dataIndex: "openid",
-    title: "openid",
-  },
-  {
-    title: "gender",
     dataIndex: "gender",
+    title: "gender",
   },
   {
-    title: "disable",
-    dataIndex: "disable",
+    title: "channel",
+    dataIndex: "channel",
   },
   {
-    title: "oneself",
-    dataIndex: "oneself",
+    title: "content",
+    dataIndex: "content",
+  },
+  {
+    title: "openid",
+    dataIndex: "openid",
+  },
+  {
+    title: "fromopenid",
+    dataIndex: "fromopenid",
+  },
+  {
+    title: "pid",
+    dataIndex: "pid",
+  },
+  {
+    title: "read",
+    dataIndex: "read",
+  },
+  {
+    title: "isopen",
+    dataIndex: "isopen",
+  },
+  {
+    title: "hadreply",
+    dataIndex: "hadreply",
+  },
+  {
+    title: "targetopenid",
+    dataIndex: "targetopenid",
   },
   {
     title: "type",
     dataIndex: "type",
   },
+  {
+    title: "createdata",
+    dataIndex: "createdata",
+  },
+
   {
     title: "updateDate",
     dataIndex: "updateDate",
@@ -72,22 +108,31 @@ const columns = [
   },
   {
     title: "Action",
-    scopedSlots: { customRender: 'action' }, 
+    scopedSlots: { customRender: "action" },
   },
 ];
 
 const data = [];
-import { getHomeMultidata } from "network/mm";
+import { getUserBottleList } from "network/mm";
+import BottleDetailDraw from "./BottleDetailDraw";
 export default {
   data() {
     return {
       data,
       columns,
       pagination: {},
+      visible: false
     };
   },
+  components: {
+    BottleDetailDraw,
+  },
   methods: {
-    customRow(record, index) {//设置行属性
+    showDrawer() {
+      this.visible = true;
+    },
+    customRow(record, index) {
+      //设置行属性
       return {
         // 这个style就是我自定义的属性，也就是官方文档中的props
         style: {
@@ -123,8 +168,8 @@ export default {
         },
       };
     },
-    getHomeMultidata(size, current) {
-      getHomeMultidata(size, current).then((res) => {
+    getUserBottleList(openid, size, current) {
+      getUserBottleList(openid, size, current).then((res) => {
         console.log(res);
         /* 为什么这样不行
             this.pagination.pageSize =  res.size//每页条数
@@ -146,8 +191,10 @@ export default {
     },
   },
   mounted() {
+    let openid = this.$route.query.openid;
+    console.log(openid);
     // 1.请求多个数据
-    this.getHomeMultidata(10, 1);
+    this.getUserBottleList(openid, 10, 1);
 
     // 2.请求商品数据
   },

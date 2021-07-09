@@ -24,7 +24,6 @@ Vue.use(Divider);
 Vue.use(Pagination);
 
 
-
 new Vue({
   router,
   store,
