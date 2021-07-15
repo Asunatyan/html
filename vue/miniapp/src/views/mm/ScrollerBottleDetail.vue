@@ -35,6 +35,7 @@ import infiniteScroll from 'vue-infinite-scroll';
 import { RecycleScroller } from 'vue-virtual-scroller';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 const fakeDataUrl = 'http://localhost:8080/api/bottleDetail/userBottleDetailList?qid=1&size=200&current=0';
+//const fakeDataUrl = 'https://randomuser.me/api/?results=10&inc=name,gender,email,nat&noinfo';
 export default {
   directives: { infiniteScroll },
   components: {
@@ -71,14 +72,14 @@ export default {
     handleInfiniteOnLoad() {
       const data = this.data;
       this.loading = true;
-      if (data.length > 100) {
+      if (data.length > 10) {
         this.$message.warning('Infinite List loaded all');
         this.busy = true;
         this.loading = false;
         return;
       }
       this.fetchData(res => {
-        this.data = data.concat(res.results).map((item, index) => ({ ...item, index }));
+        this.data = data.concat(res.records).map((item, index) => ({ ...item, index }));
         this.loading = false;
       });
     },
