@@ -43,7 +43,14 @@
       </span>
     </a-table>
     <BottleDetailDraw :isshow="isshow" :qid="qid"  @closeDrawer="closeDrawer" />
+    <!-- <div>
+    <a-back-top />
+    Scroll down to see the bottom-right
+    <strong style="color: rgba(64, 64, 64, 0.6)"> gray </strong>
+    button.
+  </div> -->
   </div>
+  
 </template>
 
 <script>
@@ -127,7 +134,7 @@ export default {
       //   qid:123,
       // },
       isshow:false,
-      qid:123
+      qid:0
     }
   },
   components: {

@@ -6,9 +6,11 @@ import store from "./store";
 //import Antd from "ant-design-vue";
 //import 'ant-design-vue/dist/antd.css';//引入样式
 //import 'ant-design-vue/dist/antd.less';//引入样式全部
-import {Button,Layout,Icon,Drawer,Radio,Menu,Table,Tag,Divider,Pagination,Input,List,Spin,Avatar} from "ant-design-vue";
+
+import {Button,Layout,Icon,Drawer,Radio,Menu,Table,Tag,Divider,Pagination,Input,List,Spin,Avatar,message} from "ant-design-vue";
 
 Vue.config.productionTip = false;
+Vue.prototype.$message = message;
 
 
 Vue.use(Button)
@@ -25,6 +27,7 @@ Vue.use(Input);
 Vue.use(List);
 Vue.use(Spin);
 Vue.use(Avatar);
+Vue.use(message);
 
 new Vue({
   router,

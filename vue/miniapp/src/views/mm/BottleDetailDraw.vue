@@ -8,20 +8,15 @@
       :visible="isshow"
       :after-visible-change="afterVisibleChange"
       @close="onClose"
-      width="500"
+      width="600"
     >
-    <ScrollerBottleDetail :bottleDetailList="bottleDetailList"/>
-      <!-- <ul>
-        <li v-for="value in bottleDetailList">
-          {{ value }}
-        </li>
-      </ul> -->
+    <ScrollerBottleDetail :qid="qid"/>
 
   <a-input-search
       placeholder="input search text"
       enter-button="Search"
       size="large"
-      @search="onSearch"
+      @search="sendMessage"
     />
 
       </v-for>
@@ -69,19 +64,19 @@ export default {
       console.log("onClose");
       this.$emit("closeDrawer", false);
     },
-    onSearch(value) {
-      console.log(value);
+    sendMessage(value) {
+      console.log(value,this.qid);
     },
   },
-  watch:{
-    qid:function(){
-        console.log("computed qid",this.qid);
-        getUserBottleDetail(this.qid, 20,0).then((res) => {
-        console.log(res);
-        this.bottleDetailList = res.records;
-        console.log(this.bottleDetailList);
-      });
-    },
-  }
+  // watch:{
+  //   qid:function(){
+  //       console.log("computed qid",this.qid);
+  //       getUserBottleDetail(this.qid, 20,0).then((res) => {
+  //       console.log(res);
+  //       this.bottleDetailList = res.records;
+  //       console.log(this.bottleDetailList);
+  //     });
+  //   },
+  // }
 };
 </script>
